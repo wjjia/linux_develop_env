@@ -1,0 +1,69 @@
+" 忽略vim-go插件对于vim版本的警告
+" let g:go_version_warning = 0
+"autocmd FileType python set shiftwidth=4 tabstop=4 sts=4 | set expandtab | setlocal smartindent
+autocmd FileType python set shiftwidth=4 tabstop=4 sts=4 | set expandtab
+autocmd FileType c,cpp set shiftwidth=2 tabstop=2 sts=2 | set expandtab | setlocal cindent
+"打开语法高亮
+syntax on
+set tabstop=4
+set shiftwidth=4
+set nonu
+set ruler
+
+set t_Co=256
+set background=dark
+colorscheme molokai  
+
+set pastetoggle=<F9> " paste pattern toggle
+map <C-n> :NERDTreeToggle<CR>
+nmap <F6> :TagbarToggle<CR>
+" 使用f8一键格式化当前文件
+" map <F8> :%!astyle --style=google --indent=spaces=2<CR>
+
+augroup filetypedetect
+au BufNewFile,BufRead *.thtml setf html
+augroup END
+
+filetype on
+filetype plugin off
+
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+endif
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree' " 目录树窗口
+Plugin 'majutsushi/tagbar' " tag列表窗口
+Plugin 'bling/vim-airline' " 状态栏
+Plugin 'tell-k/vim-autopep8' " python格式化
+Plugin 'maksimr/vim-jsbeautify' " js,html,css,json格化
+"Plugin 'fatih/vim-go' " go格式化, 依赖的插件太多了
+
+augroup autoformat_settings
+"   autocmd FileType bzl AutoFormatBuffer buildifier
+"   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer cindent
+    autocmd FileType c,cpp,proto,java noremap <buffer> <F8> :%!astyle --style=google --indent=spaces=2<CR>
+"   autocmd FileType dart AutoFormatBuffer dartfmt
+"   autocmd FileType go AutoFormatBuffer gofmt
+"    autocmd FileType go <buffer> <F8> :%!gofmt<CR>
+"   autocmd FileType gn AutoFormatBuffer gn
+"   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType javascript,json noremap <buffer> <F8> :call JsBeautify()
+    autocmd FileType html noremap <buffer> <F8> :call HtmlBeautify()
+   "   for css or scss
+    autocmd FileType css,sass,scss,less noremap <buffer> <F8> :call CSSBeautify()
+"   autocmd FileType java AutoFormatBuffer google-java-format
+"   autocmd FileType python AutoFormatBuffer yapf
+    autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+"   " Alternative: autocmd FileType python AutoFormatBuffer autopep8  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+call vundle#end()
+
+filetype plugin indent on " required
+"设置切换历史Buffer快捷键"
+nnoremap <C-J> :bn<CR>
+nnoremap <C-K> :bp<CR>
