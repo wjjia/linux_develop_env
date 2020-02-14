@@ -13,7 +13,7 @@ fi
 
 # 安装基础开发工具
 SOFT_LIST_CENTOS=( tmux gcc-c++ python3 python3-pip java-1.8.0-openjdk-headless git nodejs go )
-SOFT_LIST_UBUNTU=( tmux gcc-c++ python3 python3-pip java-1.8.0-openjdk-headless git nodejs golang )
+SOFT_LIST_UBUNTU=( tmux g++ python3 python3-pip openjdk-8-jdk-headless git nodejs golang )
 if [[ $OS == "centos" ]]; then
 	sudo yum install -y ${SOFT_LIST_CENTOS[@]}
 elif [[ $OS == "ubuntu" ]]; then

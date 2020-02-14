@@ -4,9 +4,9 @@ Initialize the development environment mainly for C, C++, java, python3, node.js
 Make vim more suitable for development.
 
 Init step
-  - Install dev tools: ./install_dev_soft.sh
-  - Init dev editor: ./install_vim_env.sh
-  - Open vim, and run :PluginInstall
+  1. Install dev tools: ./install_dev_soft.sh
+  2. Init dev editor: ./install_vim_env.sh
+  3. Open vim, and run :PluginInstall
 
 How to use vim
   * Format code: press F8

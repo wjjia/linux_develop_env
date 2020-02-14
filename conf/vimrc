@@ -10,6 +10,10 @@ set shiftwidth=4
 set nonu
 set ruler
 
+set nocompatible    " Use Vim defaults (much better!)
+set backspace=indent,eol,start
+set hlsearch
+
 set t_Co=256
 set background=dark
 colorscheme molokai  
