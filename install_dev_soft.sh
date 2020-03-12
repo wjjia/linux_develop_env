@@ -12,8 +12,8 @@ if [[ $OS != "centos" && $OS != "ubuntu" ]]; then
 fi
 
 # 安装基础开发工具
-SOFT_LIST_CENTOS=( tmux gcc-c++ python3 python3-pip java-1.8.0-openjdk-headless git nodejs go )
-SOFT_LIST_UBUNTU=( tmux g++ python3 python3-pip openjdk-8-jdk-headless git nodejs golang )
+SOFT_LIST_CENTOS=( tmux gcc-c++ python3 python3-pip java-1.8.0-openjdk-devel git nodejs go tree )
+SOFT_LIST_UBUNTU=( tmux g++ python3 python3-pip openjdk-8-jdk git nodejs golang tree )
 if [[ $OS == "centos" ]]; then
 	sudo yum install -y ${SOFT_LIST_CENTOS[@]}
 elif [[ $OS == "ubuntu" ]]; then
@@ -21,14 +21,20 @@ elif [[ $OS == "ubuntu" ]]; then
 else
 	echo "install nothing"
 fi
-# 替换~/.bashrc
+# 替换~/.bashrc; 如果不设置自定义颜色，vim配色可能显示不正常
 read -p "Replace ~/.bashrc with conf/bashrc? (y/n)" replace_conf
 if [[ $replace_conf == "y" ]]; then
 	cp ./conf/bashrc ~/.bashrc
 fi
-# 替换~/.bashrc
+# 替换~/.gitconfig
 read -p "Replace ~/.gitconfig with conf/gitconfig? (y/n)" replace_conf
 if [[ $replace_conf == "y" ]]; then
 	cp ./conf/gitconfig ~/.gitconfig
+fi
+# 替换~/.pip/pip.conf
+read -p "Replace ~/.pip/pip.conf with conf/pip.conf? (y/n)" replace_conf
+if [[ $replace_conf == "y" ]]; then
+	mkdir -p ~/.pip/
+	cp ./conf/pip.conf ~/.pip/pip.conf
 fi
 exit

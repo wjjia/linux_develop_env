@@ -17,6 +17,8 @@ fi
 # update vim
 #sudo yum update -y vim*
 
+# 安装Exuberant-Ctags支持tagbar插件
+sudo yum install -y ctags-etags
 # 安装格式化等辅助工具
 sudo pip3 install --upgrade autopep8
 #sudo pip3 install jsbeautifier
